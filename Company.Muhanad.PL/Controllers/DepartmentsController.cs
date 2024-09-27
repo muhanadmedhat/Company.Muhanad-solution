@@ -16,10 +16,19 @@ namespace Company.Muhanad.PL.Controllers
             _departmentRepository = departmentRepository;
             _unitOfWork = unitOfWork;
         }
-        [HttpGet]
-        public async Task<IActionResult> Index()
+        
+        public async Task<IActionResult> Index(string searchInput)
         {
-            var result=await _departmentRepository.GetAllAsync();
+            var result = Enumerable.Empty<Department>();
+            if (string.IsNullOrEmpty(searchInput))
+            {
+             result=await _departmentRepository.GetAllAsync();
+
+            }
+            else
+            {
+                 result = await _departmentRepository.GetByNameAsync(searchInput);
+            }
             return View(result);
         }
         [HttpGet]

@@ -7,6 +7,17 @@
 <h1>All Departments</h1>
 <br />
 <br />
+<form asp-action="Index">
+    <div class="row m-5">
+        <div class="col-8 ">
+            <input type="text" class="form-control" placeholder="Search By Name" name="searchInput" id="searchInput" />
+        </div>
+        <div class="col-4">
+            <input type="submit" class="btn btn-success" value="Search" />
+        </div>
+    </div>
+</form>
+<br />
 <a asp-action="Create" class="btn btn-primary">Create Department</a>
 <br />
 

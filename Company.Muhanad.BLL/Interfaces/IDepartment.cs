@@ -10,6 +10,7 @@ namespace Company.Muhanad.BLL.Interfaces
     public interface IDepartment : IGenericRepository<Department>
     {
        
+     public Task<IEnumerable<Department>> GetByNameAsync(string name);
 
     }
 }
