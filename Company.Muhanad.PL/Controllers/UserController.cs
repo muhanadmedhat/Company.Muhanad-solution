@@ -29,7 +29,7 @@ namespace Company.Muhanad.PL.Controllers
 					FirstName = X.FirstName,
 					LastName = X.LastName,
 					Email = X.Email,
-					Roles = _userManager.GetRolesAsync(X).Result
+					Roles = _userManager.GetRolesAsync(X).GetAwaiter().GetResult()
 				}).ToListAsync();            
             }
 			else
@@ -40,7 +40,7 @@ namespace Company.Muhanad.PL.Controllers
                     FirstName = X.FirstName,
                     LastName = X.LastName,
                     Email = X.Email,
-                    Roles = _userManager.GetRolesAsync(X).Result
+                    Roles = _userManager.GetRolesAsync(X).GetAwaiter().GetResult()
                 }).ToListAsync();
 			}            
 			return View(users);
@@ -59,8 +59,8 @@ namespace Company.Muhanad.PL.Controllers
 				FirstName = result.FirstName,
 				LastName = result.LastName,
 				Email = result.Email,
-				Roles = _userManager.GetRolesAsync(result).Result
-			};
+				Roles = _userManager.GetRolesAsync(result).GetAwaiter().GetResult()
+            };
 			return View(viewname,user);
 		}
 		[HttpGet]

@@ -56,7 +56,7 @@ namespace Company.Muhanad.PL.Controllers
         {
             if(ModelState.IsValid)
             {
-                if (!string.IsNullOrEmpty(employee.ImageName))
+                if (employee.Image is not null)
                 {
                     employee.ImageName = DocumentSettings.UploadFile(employee.Image, "images");
                 }
@@ -100,11 +100,25 @@ namespace Company.Muhanad.PL.Controllers
             if (ModelState.IsValid)
             {
 
-                if(employee.ImageName is not null)
+                if(employee.Image is not null)
+                {
+                    if(employee.ImageName is not null)
+                    {
+                        DocumentSettings.DeleteFile(employee.ImageName, "images");
+                    }
+                    employee.ImageName = DocumentSettings.UploadFile(employee.Image, "images");
+                }
+                else
+                {
+                    employee.ImageName = employee.ImageName;
+                }
+
+
+                /*if(employee.ImageName is not null)
                 {
                     DocumentSettings.DeleteFile(employee.ImageName, "images");
                     employee.ImageName = DocumentSettings.UploadFile(employee.Image, "images");
-                }
+                }*/
                 var result=_mapper.Map<Employee>(employee);
                 var count =await _unitOfWork.employeeRepository.UpdateAsync(result);
                 if(count > 0)
